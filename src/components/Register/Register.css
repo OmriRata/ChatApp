@@ -1,0 +1,86 @@
+label {
+    font-size:medium;
+    border-bottom-left-radius: 7px;
+    max-height:20px;
+}
+
+#password,#userName,#nickname{
+    color:blue;
+}
+
+
+.inp {
+    width: 70%;
+    background-color: gainsboro;
+    align-content: center;
+    justify-content: center;
+    margin-left: 15%;
+    display: block;
+    margin: 0 auto;
+}
+#display-image{
+    width: 45%;
+    height:100px;
+    border: 1px solid black;
+    background-position: center;
+    background-size: cover;
+    text-align: center;
+    align-self: center;
+    justify-content:center;
+    margin-left: 28%;
+    
+  }
+.form-floating {
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 0 25% 0;
+}
+
+#form1 {
+    text-align: center;
+    background-color: ghostwhite;
+    justify-content: center;
+    margin: 40px;
+    margin-left:20%;
+    margin-right:20%;
+    max-height:100%;
+    border: 5px solid gray;
+    border-radius:25px;
+    position: relative;
+}
+.md-4-row {
+    width: 60%;
+    height: 30%;
+    max-height: 20%;
+    justify-content: center;
+    align-items: center;
+    margin: 0 25% 0;
+    position: relative;
+}
+
+.btn.btn-primary.mb-1 {
+    width: 40%;
+    margin: 0 30% 0;
+    max-height: 100%;
+    position: relative;
+    border-radius:25px;
+}
+
+.header1 {
+    margin-top:0px;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color:blueviolet;
+}
+
+
+#image-input{
+    position:relative;
+}
+
+.col-12{
+    position:relative;
+}

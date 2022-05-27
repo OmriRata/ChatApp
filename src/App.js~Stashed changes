@@ -1,0 +1,72 @@
+import './App.css';
+import Nav from './components/Nav/Nav';
+import { useState } from 'react';
+import Login from './components/Login/Login';
+import Register from './components/Register/Register';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import users from './components/DataBase/db';
+import ChatPage from './components/ChatPage/ChatPage';
+import Home from './components/HomePage/Home';
+import Sidebar from './components/ChatPage/Sidebar';
+
+
+/*
+const x = () => {
+    var elm = document.getElementsByClassName("nav-link");
+    console.log(elm[1].href="www.google.com");
+    elm[1].textContent = elm[1].textContent == "Hello" ? "Register" : "Hello";
+}*/
+
+function App() {
+    const [_users, setUsers] = useState(users);
+    const addUser = function (user) {
+        console.log(user);
+        console.log(_users.length);
+        setUsers(_users.concat(user));
+    }
+
+    const addContact = function (user, contact) {
+        var newX = users.filter((_user) => {
+            return _user.username !== user.username
+        })
+
+        const newuser = { username: user.username, nickname: user.nickname, password: user.password, image: user.image, contacts: user.contacts.concat(contact) };
+        setUsers([newuser]);
+        console.log(newuser);
+        console.log(users);
+        console.log(newX);
+
+    }
+    //{page !== 'Register' ? <Login /> : <Register />}
+    return (
+
+        <Router>
+        
+            <div className="App">
+                <Nav />
+                <Switch>
+                    <Route exact path='/login'>
+                        <Login users={_users} />
+                    </Route>
+                    <Route path='/register'>
+                        <Register users={_users} func={addUser}/>
+                    </Route>
+
+                    <Route path='/chat'>
+                        <ChatPage users={_users} addContacts={addContact}/>
+                </Route>
+                <Route path='/sidebar'>
+                    <Sidebar />
+                </Route>
+        
+                
+                    
+                </Switch>
+               
+            </div>
+        
+        </Router>
+    );
+}
+
+export default App;

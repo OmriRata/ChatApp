@@ -1,0 +1,64 @@
+
+.form-control {
+    width: 60%;
+    height:10%;
+    background-color: whitesmoke;
+    align-self: center;
+    position: relative;
+    margin-left: 20%;
+    margin-right: 20%;
+    border-radius: 20px;
+    text-align:center;
+}
+
+.login {
+    padding: 20px;
+    background-color: #D3D3D3;
+    margin-top: 5%;
+    margin-left: 35%;
+    margin-right: 35%;
+    justify-content: center;
+    height: 80%;
+    width: 30%;
+    border: 3px solid lightgray;
+    position: absolute;
+    border-radius: 20px;
+}
+
+.error{
+    color: red;
+    align-content:center;
+    text-align:center;
+}
+#verify {
+    width: 50%;
+    height: 50px;
+    border-radius: 30px;
+    position:relative;
+    margin-left:25%;
+    overflow:hidden;
+}
+h3 {
+    text-align:center;
+    height:10%;
+}
+.main {
+    justify-content: center;
+    align-items: center;
+    margin: 2% 25% 0;
+    height: 400px;
+    transform-box:border-box;
+    border: 1px solid lightgray;
+}
+
+.loginImg{
+    height:100%;
+    position:relative;
+}
+
+.login_user{
+    height:20%;
+    margin-left:37.5%;
+    position:relative;
+    width:25%;
+}

@@ -1,0 +1,310 @@
+.chat1 {
+    background-color: whitesmoke;
+    color: chartreuse;
+    max-width: 100%;
+    height: 600px;
+    width: 100%;
+    margin-right: 10%;
+    border: 1px solid black;
+    border-radius: 30px;
+    text-align: center;
+    display: flex;
+    box-shadow: 10px 10px 10px #888888;
+    box-shadow: inset 0 0 5px grey;
+    position: relative;
+    margin-top: 3%;
+}
+.welcome{
+    position:absolute;
+    top:5%;
+    height:20%;
+    width:15%;
+    right:28%;
+    color:black;
+}
+.list-group-item {
+    background-color: aqua;
+    cursor: pointer;
+}
+
+.card {
+    position: relative;
+    background-color: green;
+    width: 25%;
+    height: 100%;
+    display: inline-block;
+    background-color: floralwhite;
+    border-top-left-radius: inherit;
+    border-bottom-left-radius: inherit;
+    background-image: url("/src/components/Image/bg-chat-light.png");
+}
+
+    .card .card-header {
+        color: black;
+        border-top-left-radius: inherit;
+    }
+
+.mess {
+    width: 100%;
+}
+
+.profile {
+    text-align: left;
+    color: gray;
+    background-color: lightgray;
+}
+
+.searchBox {
+    width: 100%;
+    border-radius: 15px;
+}
+
+
+.card ul {
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 60%;
+}
+
+.mainChat {
+    background-color: floralwhite;
+    bottom: 10%;
+    top: 0px;
+    right: 0px;
+    position: absolute;
+    height: 90%;
+    max-height: 100%;
+    width: 75%;
+    border-top-right-radius: 30px;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column-reverse;
+    background-image: url("/src/components/Image/wall1.jpg");
+}
+
+
+
+
+.hii, .c2 {
+    justify-content: left;
+    margin-left: 0px;
+    color: orange;
+    position: relative;
+    background-color: lightblue;
+}
+
+.form-control1 {
+    bottom: 0px;
+    right: 0px;
+    background-color: white;
+    height: 10%;
+    width: 75%;
+    border-bottom-right-radius: inherit;
+    border-bottom-left-radius: 0 .25rem;
+    border-top-left-radius: 0 .25rem;
+    position: absolute;
+    border-top: 1px solid black;
+}
+
+.c1 {
+    justify-content: right;
+    margin-right: 0px;
+    color: hotpink;
+    position: relative;
+    background-color: gold;
+}
+
+.textinp {
+    position: absolute;
+    height: 100%;
+    width: 50%;
+    right: 0px;
+    left: 20%;
+    bottom: 0px;
+    border: none;
+}
+
+.btn.btn-success {
+    position: absolute;
+    margin: 0px;
+    left: 0px;
+    height: 100%;
+    max-height: 100%;
+    width: 20%;
+    color: black;
+}
+
+.addButtons {
+    right: 0px;
+    height: 100%;
+    width: 30%;
+    position: absolute;
+    border-bottom-right-radius: inherit;
+    justify-content: center;
+    /* //background-color: floralwhite; */
+}
+
+.c1, .c2, .hii {
+    scroll-behavior: auto;
+    height: 50px;
+    border-block-start: 0.3px solid gray;
+    padding: 10px;
+    overflow: auto;
+}
+
+
+.btn-primary.addFriend {
+    width: 60%;
+    height: 10%;
+    margin-left: -6%;
+    position: relative;
+    bottom: 0px;
+    margin-top: 12%;
+    border-radius: 25px;
+}
+
+.bi.bi-person-plus-fill {
+    height: 10px;
+}
+
+
+.col {
+    position: relative;
+    margin:2%;
+    width:20%;
+    background-color:white;
+
+    height:80%;
+    align-content:center;
+    display:flow;
+
+}
+.file {
+    border-radius: 0px;
+    height: 75%;
+}
+
+.voice {
+    border-radius: 50%;
+    height: 85%;
+}
+.video,.image {
+    border-radius: 0px;
+}
+    .imgcon {
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        position: absolute;
+        top: 12px;
+        left: 16px;
+    }
+.contactName{
+    color: black;
+    width: 55px;
+    height: 40px;
+    top: 0;
+    margin-left:20%;
+}
+.time{
+ margin-top: 10%;
+margin-left: 82%;
+width: 40px;
+height: 40px;
+top: 0;
+color: rgb(5, 14, 6);
+}
+.lastM{
+    margin-left: 20%;
+    margin-bottom: 1cm;
+     
+    
+
+}
+.nameStyle{
+    text-transform: uppercase;
+    font-family: verdana;
+   
+    color:  linear-gradient(-45deg, #ee7752, #e73c7e, #d5b1b1, #23d5ab);
+    text-shadow: 1px 1px 1px #919191,
+        1px 2px 1px #672222,
+        1px 3px 1px #04ff00,
+        1px 4px 1px #1600df,
+        1px 5px 1px #ccff00,
+        1px 6px 1px #00f7e6,
+        1px 7px 1px #5a003b,
+        1px 8px 1px #c56262,
+        1px 9px 1px #919191,
+        1px 10px 1px #919191,
+    1px 18px 6px rgba(223, 141, 141, 0.4),
+    1px 22px 10px rgba(0, 243, 24, 0.2),
+    1px 25px 35px rgba(16,16,16,0.2),
+    1px 30px 60px rgba(16,16,16,0.4);
+      
+  @keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+}
+.h4modal{
+    animation: mymove 5s infinite;
+  
+ @keyframes mymove {
+   from{top: 0%;}
+   to {top: 50%;}
+     
+ }
+    text-transform: uppercase;
+    font-family: verdana;
+    position: relative;
+    color:  linear-gradient(-45deg, #ee7752, #e73c7e, #d5b1b1, #23d5ab);
+    text-shadow: 1px 1px 1px #919191,
+        1px 2px 1px #919191,
+        1px 3px 1px #919191,
+        1px 4px 1px #4c00ff,
+        1px 5px 1px #919191,
+        1px 6px 1px #ff0000,
+        1px 7px 1px #919191,
+        1px 8px 1px #919191,
+        1px 9px 1px #919191,
+        1px 10px 1px #55ff00,
+    1px 18px 6px rgba(16,16,16,0.4),
+    1px 22px 10px rgba(16,16,16,0.2),
+    1px 25px 35px rgba(16,16,16,0.2),
+    1px 30px 60px rgba(16,16,16,0.4);
+}
+
+  
+  @keyframes slide-right {
+    from {
+      margin-left: -100%;
+      width: 300%; 
+    }
+  
+    to {
+      margin-left: 0%;
+      width: 100%;
+    }
+  }
+  .pImage{
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+
+
+  }
+
+#myMenu{
+    overflow-y:scroll;
+    height:30%;
+    position:absolute;
+    display: inline-block;
+    justify-content:center;
+}
