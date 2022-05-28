@@ -8,6 +8,9 @@ function Nav() {
             <li className="nav-item">
                 <NavLink className="nav-link" to='/register' >Register</NavLink>
             </li>
+            <li className="nav-item">
+                <a className="nav-link" href='https://localhost:7191/Rating/index' >Rate us</a>
+            </li>
         </ul>
 		);
 }
