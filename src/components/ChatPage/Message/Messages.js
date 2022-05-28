@@ -5,7 +5,7 @@ import Message from './Message';
 
 
 
-function Messages({ messages, id }) {
+function Messages({ id }) {
     const [mess, setMess] = useState([]);
     const t = mess.map((i, key) => {
         return <Message key={key} sent={i   .sent} data={i.content} /*img={img}*/ time={i.created} />

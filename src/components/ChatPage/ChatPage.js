@@ -19,7 +19,7 @@ import fileTest from './../Image/test.txt';
 import macarena from './../Image/macarena.mp4';
 import hasson from './../Image/welcome.mp3';
 
-function ChatPage({ users, addContacts }) {
+function ChatPage({ users }) {
     const [contact, setContact] = useState(null);
     const [contacts, setcontacts] = useState(null);
     const [messages, setMess] = useState(null);
@@ -95,9 +95,8 @@ function ChatPage({ users, addContacts }) {
         //document.getElementsByClassName('mainChat')[0].scrollTop = document.getElementsByClassName('mainChat')[0].scrollHeight;
     const changeChat = (contact) => {
         contacts.map((e) => {
-            if (e.username == contact) {
-                setMess(e.mem);
-                setContact(e);
+            if (e.id == contact) {
+                setContact(e.id);
             }
         })
     };
@@ -251,12 +250,12 @@ function ChatPage({ users, addContacts }) {
                 {contacts && < Contacts contacts={contacts} users={users} /*addFriend={addFriend}*/ changeChat={changeChat} />}
 
                 <div className="mainChat">
-                    {contact && < Messages messages={messages} /*img={user && user.image}*/ />}
+                    {contact && < Messages messages={messages} id={contact} />}
                 </div>
                 {!contact && < div className='welcome'>welcome&nbsp;{localStorage.getItem("userId")}&nbsp;<h1>hello</h1></div>}
 
                 {contact && <div className="form-control1">
-                    <div id='inputs' className="addButtons">
+              {/*      <div id='inputs' className="addButtons">
                         <input id='hiddenbtn' type='file' hidden ></input>
 
                         <input type='image' onClick={sendFile} className='col image' src={imageupload} name='imageupload'></input>
@@ -266,7 +265,7 @@ function ChatPage({ users, addContacts }) {
 
                         <input type='image' onMouseDown={record} id='record_btn' className='col voice' src={voice_black} name='recorder'></input >
 
-                    </div>
+                    </div>*/}
                     <input autoComplete="off" onKeyDown={sendMessage} className="textinp" type="text" id="formGroupExampleInput" placeholder="Enter a messege"></input>
                     <button onClick={sendMessage} type="button" className="btn btn-success">Send</button>
                 </div>}
