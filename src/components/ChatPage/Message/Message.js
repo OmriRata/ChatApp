@@ -6,7 +6,7 @@ import imageSent from './../../Image/imageiconsend.png';
 
 
 
-function Message({sent,data,img,time}) {
+function Message({sent,data,time}) {
     //    const d= <div dangerouslySetInnerHTML={{__html: data}} />
      
     const convert = (_data) => {
@@ -20,7 +20,7 @@ function Message({sent,data,img,time}) {
 
     if (sent) {
         return <div className="container lighter">
-            <img src={img} className='right' alt="Avatar" ></img>
+            <img src={Avatar} className='right' alt="Avatar" ></img>
             {convert(data)}
             <span className="time-right">{time}</span>
         </div>
