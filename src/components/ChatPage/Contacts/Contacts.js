@@ -13,8 +13,8 @@ import { PopupImg } from './../Sidebar/Sidebar.js';
 
 function Contacts({ contacts, users, addFriend, addContact, changeChat }) {
     const [_contacts, setcontacts] = useState(contacts);
-    const username = localStorage.getItem("userId");
-    
+    const _username = localStorage.getItem("userId");
+    console.log(_contacts);
     function getImage(user){
         var image;
         users.map((x)=>{
@@ -24,9 +24,61 @@ function Contacts({ contacts, users, addFriend, addContact, changeChat }) {
     }
 
     //POST 
-    const callAddfriend = (username) => {
-        addFriend(username);
-        //setcontacts(user.contacts);
+    const callAddfriend = async (username) => {
+        //addFriend(username);
+        await fetch("https://localhost:7191/api/contacts", {
+            method: "POST",
+            body: JSON.stringify({
+                id: username.id,
+                name: username.name,
+                server: username.server
+            }),
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem("token")
+
+            }
+        }).then(response => response.json())
+            .then(res => {
+                console.log(res);
+                setcontacts(res);
+                console.log(res.status);
+                var status = res.status;
+                if (!status) {
+                    console.log("its ok");
+                } else {
+                    console.log("u are not a user");
+                    return;
+                }
+            });
+        await fetch(username.server+"/api/invitation", {
+            method: "POST",
+            body: JSON.stringify({
+                to: username.id,
+                from: _username,
+                server: username.server
+            }),
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem("token")
+
+            }
+        }).then(response => response.json())
+            .then(res => {
+                console.log(res);
+                setcontacts(res);
+                console.log(res.status);
+                var status = res.status;
+                if (!status) {
+                    console.log("its ok");
+                } else {
+                    console.log("u are not a user");
+                    return;
+                }
+            });
+
     }
 
    const modelpop = () => {
@@ -98,7 +150,7 @@ function Contacts({ contacts, users, addFriend, addContact, changeChat }) {
         <div className="card">
             <div className="card-header">
                 <h5 className='nameStyle'>
-                    welcome {username}
+                    welcome {_username}
                 </h5>
 {/*                <img id="myImg" className='myImg' onClick={PopupImg} src={user.image} />
 */}                    <div id="myModal" className="modal">
