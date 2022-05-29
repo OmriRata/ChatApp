@@ -5,10 +5,10 @@ import Message from './Message';
 
 
 
-function Messages({ id }) {
+function Messages({ id, isNew }) {
     const [mess, setMess] = useState([]);
     const t = mess.map((i, key) => {
-        return <Message key={key} sent={i   .sent} data={i.content} time={i.created} />
+        return <Message key={key} sent={i.sent} data={i.content} time={i.created} />
     })
 
     useEffect(() => {
@@ -32,7 +32,7 @@ function Messages({ id }) {
                     console.log("not go the contacts on chatPage")
                 }
             });
-    }, [id]);
+    }, [id, isNew]);
 
     return (
         <div  className='mess'>
