@@ -23,6 +23,9 @@ function ChatPage({ users }) {
     const [contact, setContact] = useState(null);
     const [contacts, setcontacts] = useState(null);
     const [messages, setMess] = useState(null);
+    const [newMess, setnewMess] = useState(false);
+    var _username = localStorage.getItem("userId").toString();
+    
     
     useEffect(() => {
             fetch("https://localhost:7191/api/contacts", {
@@ -96,15 +99,15 @@ function ChatPage({ users }) {
     const changeChat = (contact) => {
         contacts.map((e) => {
             if (e.id == contact) {
-                setContact(e.id);
+                setContact(e);
             }
         })
     };
 
 
 
-        const sendMessage = (e) => {
-            var message = document.getElementsByClassName("textinp")[0];
+        const sendMessage = async (e) => {
+/*            var message = document.getElementsByClassName("textinp")[0];
             var newMess;
             var today = new Date();
             var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
@@ -125,8 +128,63 @@ function ChatPage({ users }) {
                 g.mem = g.mem.concat([{ sent: true, message: message.value, time: time }]);
                 g.last = ({ time: time, message: message.value });
                 message.value = '';
-            }
+            }*/
+            var message = document.getElementsByClassName("textinp")[0];
+            await fetch("https://localhost:7191/api/contacts/"+contact.id+"/messages", {
+                method: "POST",
+                body: JSON.stringify({
+                    content: message.value,
+                    sent: true
+                }),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'Authorization': 'Bearer ' + localStorage.getItem("token")
 
+                }
+            }).then(response => response.json())
+                .then(res => {
+                    console.log(res);
+                    console.log(res.status);
+                    var status = res.status;
+                    if (!status) {
+                        console.log("its ok");
+                    } else {
+                        console.log("u are not a user");
+                        return;
+                    }
+                });
+            console.log("-------------------start TRANSFER------------------- ");
+            console.log('https://' + contact.server + '/api/Transfer');
+            await fetch('https://' + contact.server + '/api/transfer', {
+                method: "POST",
+                body: JSON.stringify({
+                    to: contact.id,
+                    from: _username.toString(),
+                    content: message.value
+                }),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'Authorization': 'Bearer ' + localStorage.getItem("token")
+
+                }
+            }).then(res => {
+                    console.log(res);
+                    console.log(res.status);
+
+                    var status = res.status;
+                    if (!status) {
+                        console.log("its ok TRANSFER");
+                    } else {
+                        console.log("cant send transfer");
+
+                        return;
+                    }
+                });
+            message.value = '';
+            if (newMess) setnewMess(false);
+            else setnewMess(true);
         }
 
         /*    const addFriend = function (username) {
@@ -225,7 +283,7 @@ function ChatPage({ users }) {
             }
         }
 
-        const sendFile = (e) => {
+        /*const sendFile = (e) => {
             const hiddenbtn = document.getElementById('hiddenbtn');
             var classname = e.target.className;
             if (classname.includes('image')) {
@@ -242,7 +300,7 @@ function ChatPage({ users }) {
             }
             hiddenbtn.click();
 
-        }
+        }*/
 
 
         return (
@@ -250,7 +308,7 @@ function ChatPage({ users }) {
                 {contacts && < Contacts contacts={contacts} users={users} /*addFriend={addFriend}*/ changeChat={changeChat} />}
 
                 <div className="mainChat">
-                    {contact && < Messages messages={messages} id={contact} />}
+                    {contact && < Messages id={contact.id} isNew={newMess} />}
                 </div>
                 {!contact && < div className='welcome'>welcome&nbsp;{localStorage.getItem("userId")}&nbsp;<h1>hello</h1></div>}
 
@@ -266,7 +324,7 @@ function ChatPage({ users }) {
                         <input type='image' onMouseDown={record} id='record_btn' className='col voice' src={voice_black} name='recorder'></input >
 
                     </div>*/}
-                    <input autoComplete="off" onKeyDown={sendMessage} className="textinp" type="text" id="formGroupExampleInput" placeholder="Enter a messege"></input>
+                    <input autoComplete="off" className="textinp" type="text" id="formGroupExampleInput" placeholder="Enter a messege"></input>
                     <button onClick={sendMessage} type="button" className="btn btn-success">Send</button>
                 </div>}
             </div>
