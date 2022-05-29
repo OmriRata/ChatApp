@@ -11,8 +11,9 @@ import { PopupImg } from './../Sidebar/Sidebar.js';
 
 
 
-function Contacts({ contacts, users, addFriend, addContact, changeChat }) {
+function Contacts({ contacts, users, changeChat }) {
     const [_contacts, setcontacts] = useState(contacts);
+    const [errMsg, seterrMsg] = useState(null);
     const _username = localStorage.getItem("userId");
     console.log(_contacts);
     function getImage(user){
@@ -26,12 +27,16 @@ function Contacts({ contacts, users, addFriend, addContact, changeChat }) {
     //POST 
     const callAddfriend = async (username) => {
         //addFriend(username);
+        const id =document.getElementById("contactId");
+        const server =document.getElementById("contactServer");
+        const name = document.getElementById("contactName");
+        console.log("addFriend invoked", name.value, server.value, id.value);
         await fetch("https://localhost:7191/api/contacts", {
             method: "POST",
             body: JSON.stringify({
-                id: username.id,
-                name: username.name,
-                server: username.server
+                id: id.value,
+                name: name.value,
+                server: server.value
             }),
             headers: {
                 'Content-Type': 'application/json',
@@ -42,22 +47,22 @@ function Contacts({ contacts, users, addFriend, addContact, changeChat }) {
         }).then(response => response.json())
             .then(res => {
                 console.log(res);
-                setcontacts(res);
                 console.log(res.status);
                 var status = res.status;
                 if (!status) {
                     console.log("its ok");
                 } else {
                     console.log("u are not a user");
+                    seterrMsg("cant add the user:" + id.value);
                     return;
                 }
             });
-        await fetch(username.server+"/api/invitation", {
+        await fetch("https://"+server.value + "/api/invitations", {
             method: "POST",
             body: JSON.stringify({
-                to: username.id,
+                to: id.value,
                 from: _username,
-                server: username.server
+                server: server.value
             }),
             headers: {
                 'Content-Type': 'application/json',
@@ -68,17 +73,17 @@ function Contacts({ contacts, users, addFriend, addContact, changeChat }) {
         }).then(response => response.json())
             .then(res => {
                 console.log(res);
-                setcontacts(res);
                 console.log(res.status);
                 var status = res.status;
                 if (!status) {
                     console.log("its ok");
                 } else {
                     console.log("u are not a user");
+                    seterrMsg("cant add the user:" + id.value);
+
                     return;
                 }
             });
-
     }
 
    const modelpop = () => {
@@ -120,7 +125,7 @@ function Contacts({ contacts, users, addFriend, addContact, changeChat }) {
                     return;
                 }
             });
-    }, []);
+    },[]);
     function Search(){
         var input, filter, ul, li, a, i;
         input = document.getElementById("mySearch");
@@ -182,7 +187,7 @@ function Contacts({ contacts, users, addFriend, addContact, changeChat }) {
             <span><h4 className='h4modal'>Search new friend</h4></span>
               <div className="mod2">
                 <span className="close">&times;</span>
-                <div className="search">
+        {/*        <div className="search">
                 <div className="searchInputs">
                 <input id='mySearch' type="text" placeholder="Search..." onKeyUp={Search}>
                                 </input>
@@ -190,7 +195,27 @@ function Contacts({ contacts, users, addFriend, addContact, changeChat }) {
                     {listContact}
                                     </ul>
                                     </div>
-               </div>
+               </div>*/}
+
+                        <br></br>
+                        <h5 style={{ color: "red" }}>{errMsg}</h5>
+
+                        <div className="md-3-row">
+                            <label className="form-label">UserName:</label>
+                            <input id="contactId" type="text" className="form-control inp" required></input>
+                        </div>
+                        <div className="md-3-row">
+                            <label className="form-label">NickName:</label>
+                            <input id="contactName" type="text" className="form-control inp"></input>
+                        </div>
+                        <div className="md-3-row">
+                            <label className="form-label">Server:</label>
+                            <input id="contactServer" type="text" className="form-control inp" required></input>
+                        </div>
+                        <br></br>
+                        <div md-3-row>
+                            <button type="submit" className="btn-primary" onClick={callAddfriend}>add</button>
+                            </div>
                 </div>
               
             </div>
