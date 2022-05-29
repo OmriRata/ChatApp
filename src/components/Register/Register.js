@@ -14,7 +14,7 @@ function Register(props) {
 
     const [file, setfile] = useState(newImage);
     
-    const registerValid = () => {
+    const registerValid = async() => {
         var username = document.getElementById("userName").value;
         var nickname = document.getElementById("nickname").value;
         var password = document.getElementById("password").value;
@@ -39,14 +39,43 @@ function Register(props) {
  
         if (passwordValidation(password, confirmPass) && flag) {
             console.log("its ok");
-            const newUser = { username: username, password: password, image: file, contacts: [] };
-            props.addUsers(props.users.concat([newUser]));
-            alert('welcome ' + username);
-            localStorage.setItem('user', JSON.stringify(newUser));
-            history.push('/chat');
+            await fetch("https://localhost:7191/api/Users?username=" + username + "&nickname=" + nickname + "&password=" + password, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                }
+            }).then(response => response.json())
+                .then(res => {
+                    console.log(res);
+                    console.log(res.status);
+                    var status = res.status;
+                    if (!status) {
+                        console.log("got contact on register");
+                    } else {
+                        console.log("not go the contacts on register")
+                    }
+                });
+            await fetch("https://localhost:7191/api/login?UserName=" + username + "&Password=" + password, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                }
+            }).then(response => response.json())
+                .then(res => {
+                    var status = res.status;
+                    if (!status) {
+                        console.log("its ok");
+                        localStorage.setItem('token', res);
+                        localStorage.setItem('userId', username);
+                        history.push('/chat');
 
-        } else {
-            console.log("its NOT ok");
+                    } else {
+                        console.log("u are not a user");
+                        return;
+                    }
+                });
         }
 
     }
